@@ -1,2 +1,2 @@
 # gameCollection
-A collection of re-making different childhood games
+All the codes are inside the assets folder. Just replace the asset folder
