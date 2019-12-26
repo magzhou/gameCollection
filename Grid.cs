@@ -62,14 +62,13 @@ public class Grid
         {
             gridArray[x, y] = value;
 			debugTextArray[x, y].text = gridArray[x,y].ToString();
-			Debug.Log(value);
         }
     }
 
     public void SetValue(Vector3 worldPosition, int value) {
         int x, y;
         GetXY(worldPosition, out x, out y);
-		Debug.Log(x + " " + y);
+        
         SetValue(x, y, value);
     }
 
@@ -83,11 +82,10 @@ public class Grid
         }
 	}
 
-	public void SetValue(Vector3 worldPosition)
+	public int GetValue(Vector3 worldPosition)
 	{
 		int x, y;
 		GetXY(worldPosition, out x, out y);
-		Debug.Log(x + " " + y);
 		return GetValue(x, y);
 	}
 }
