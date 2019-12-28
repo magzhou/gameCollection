@@ -24,13 +24,17 @@ public class Testing : MonoBehaviour
             vec = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             vec.z = 0f;
             GetXY(vec, out h, out v);
-		}
+
+            MonoBehaviour.print("Mouse Down at " + h + v);
+
+            grid.SetValue(vec, 2);
+        }
         else if (Input.GetMouseButtonUp(0))
         {
             vec = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             vec.z = 0f;
 
-            grid.SetValue(vec, 3);
+            grid.SetValue(vec, 9);
         }
 
         if (Input.GetMouseButton(0)) {
@@ -41,14 +45,11 @@ public class Testing : MonoBehaviour
 
             if (mouseX > 0 || mouseY > 0) { GetXY(vec, out ch, out cv); }
 
-            if (IsHorizontal(h, v, ch, cv) && mouseY <= 0.05 && mouseX > 0){
-                grid.SetValue(vec, 5);
-                MonoBehaviour.print("Mouse X: " + mouseX);
-                MonoBehaviour.print("Mouse Y: " + mouseY);
-                MonoBehaviour.print("Horizontal: ");
-            }
+            MonoBehaviour.print("Mouse moved " + mouseX + " in x direction. " + "Mouse moved " + mouseY + " in y direction");
 
-            if (IsDiagonal(h, v, ch, cv) && mouseY > 0.1 && mouseX > 0.1){ grid.SetValue(vec, 2);}
+            if (Math.Abs(mouseY) <= 0.05 && Math.Abs(mouseX) > 0){grid.SetValue(vec, 4);}
+            if (Math.Abs(mouseX) <= 0.05 && Math.Abs(mouseY) > 0) { grid.SetValue(vec, 5); }
+            if (IsDiagonal(h, v, ch, cv) && Math.Abs(mouseY) > 0.1 && Math.Abs(mouseX) > 0.1){ grid.SetValue(vec, 2);}
         }
     }
 

@@ -42,7 +42,7 @@ public class Grid
         transform = gameObject.transform;
         transform.localPosition = GetworldPosition(x, y) + new Vector3(10f, 10f) * .5f;
         textMesh = gameObject.GetComponent<TextMesh>();
-        textMesh.fontSize = 12;
+        textMesh.fontSize = 32;
         textMesh.text = gridArray[x, y].ToString();
 		debugTextArray[x, y] = textMesh;
 	}
