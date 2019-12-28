@@ -45,11 +45,16 @@ public class Testing : MonoBehaviour
 
             if (mouseX > 0 || mouseY > 0) { GetXY(vec, out ch, out cv); }
 
-            MonoBehaviour.print("Mouse moved " + mouseX + " in x direction. " + "Mouse moved " + mouseY + " in y direction");
+            if (IsDiagonal(h, v, ch, cv) && Math.Abs(mouseY) > 0.1 && Math.Abs(mouseX) > 0.1) { grid.SetValue(vec, 2); }
 
-            if (Math.Abs(mouseY) <= 0.05 && Math.Abs(mouseX) > 0){grid.SetValue(vec, 4);}
-            if (Math.Abs(mouseX) <= 0.05 && Math.Abs(mouseY) > 0) { grid.SetValue(vec, 5); }
-            if (IsDiagonal(h, v, ch, cv) && Math.Abs(mouseY) > 0.1 && Math.Abs(mouseX) > 0.1){ grid.SetValue(vec, 2);}
+            if (Math.Abs(mouseY) <= 0.05 && Math.Abs(mouseX) > 0) {
+                MonoBehaviour.print("");
+                grid.SetValue(vec, 4);
+            }
+            if (Math.Abs(mouseX) <= 0.05 && Math.Abs(mouseY) > 0) {
+                MonoBehaviour.print("");
+                grid.SetValue(vec, 5);
+            }
         }
     }
 
