@@ -12,6 +12,7 @@ public class Testing : MonoBehaviour
     private int ch, cv;
     private float mouseX, mouseY;
 
+    private int flag;
     private Vector3 vec;
 
     private void Start()
@@ -34,36 +35,43 @@ public class Testing : MonoBehaviour
             vec = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             vec.z = 0f;
 
-            grid.SetValue(vec, 9);
-        }
+            GetXY(vec, out ch, out cv);
 
-        if (Input.GetMouseButton(0)) {
-            vec = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            vec.z = 0f;
-            mouseX = Input.GetAxis("Mouse X");
-            mouseY = Input.GetAxis("Mouse Y");
+            MonoBehaviour.print("Mouse Released at " + ch + cv);
 
-            if (mouseX > 0 || mouseY > 0) { GetXY(vec, out ch, out cv); }
-
-            if (IsDiagonal(h, v, ch, cv) && Math.Abs(mouseY) > 0.1 && Math.Abs(mouseX) > 0.1) { grid.SetValue(vec, 2); }
-
-            if (Math.Abs(mouseY) <= 0.05 && Math.Abs(mouseX) > 0) {
-                MonoBehaviour.print("");
-                grid.SetValue(vec, 4);
+            if ( IsHorizontal(h, v, ch, cv) ){
+                flag = Math.Abs(ch - h);
+                for (int i = 0; i < flag; i++, h++)
+                {
+                    grid.SetValue(h, v, 2);
+                }
             }
-            if (Math.Abs(mouseX) <= 0.05 && Math.Abs(mouseY) > 0) {
-                MonoBehaviour.print("");
-                grid.SetValue(vec, 5);
+            else if ( IsDiagonal(h, v, ch, cv) ){
+                flag = Math.Abs(cv - v);
+                for (int i = 0; i <= flag; i++, v++, h++)
+                {
+                    grid.SetValue(h, v, 2);
+                }
+            }
+            else if ( IsVertical(h, v, ch, cv) ) {
+                flag = Math.Abs(cv - v);
+                for (int i = 0; i < flag; i++, v++)
+                {
+                    grid.SetValue(h, v, 2);
+                }
             }
         }
     }
 
     private bool IsHorizontal(int x1, int y1, int x2, int y2)
     {
-        if ((Math.Abs(y1 - y2)==0)&& (Math.Abs(x1 - x2) == 1))
-        {
-            return true;
-        }
+        if ( y1 == y2 ){ return true; }
+        return false;
+    }
+
+    private bool IsVertical(int x1, int y1, int x2, int y2)
+    {
+        if ( (x1 == x2) ){ return true; }
         return false;
     }
 
